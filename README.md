@@ -76,7 +76,7 @@ You will also need:
 
 ### 1. Clone or download the repository
 
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git clone https://github.com/aeonian-harshul/Kanna.git
 
 OR download ZIP and extract
 
