@@ -31,7 +31,12 @@ Kanna was built to provide a simple, one-click interface for efficient image com
 Download the latest executable from Releases:
 
 https://github.com/YOUR_USERNAME/YOUR_REPO/releases
-<img width="1470" height="294" alt="image" src="https://github.com/user-attachments/assets/f0b7e872-6a4e-4b5c-afde-0d095e3e495e" />
+<img width="1458" height="555" alt="image" src="https://github.com/user-attachments/assets/8d50c450-c062-4869-a9d8-df09416b62d8" />
+
+### ⚠️ Windows SmartScreen Warning
+Because Kanna is a newly built, open-source tool without a paid corporate certificate, your browser or Windows Defender may flag the `.exe` as an "unrecognized app."
+<img width="449" height="600" alt="image" src="https://github.com/user-attachments/assets/0a0cb58c-65ab-49db-822a-bc97ae47fb77" />
+edge showing it me on my own pc
 
 ---
 
@@ -154,6 +159,7 @@ Pingo internally uses multiple open-source libraries including:
 - Progress bar with live status
 - File count and size reduction statistics
 - Drag-and-drop folder support
+- choose number of threads to use of your cpu
 
 ---
 
