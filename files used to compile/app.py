@@ -3,6 +3,7 @@ import sys
 import shutil
 import subprocess
 import threading
+import concurrent.futures
 import customtkinter as ctk
 from tkinter import filedialog, messagebox
 
@@ -31,27 +32,44 @@ def browse_output():
 
 def compress():
     def run_compression():
-        exe_dir = os.getcwd()
+        # UX Fix: Disable button and show processing status
+        compress_btn.configure(text="Compressing... Please wait", state="disabled")
+        
+        try:
+            exe_dir = os.getcwd()
 
-        input_path = exe_dir if input_same.get() else input_entry.get()
-        if not input_path:
-            messagebox.showerror("Error", "Select input folder")
-            return
+            input_path = exe_dir if input_same.get() else input_entry.get()
+            if not input_path:
+                messagebox.showerror("Error", "Select input folder")
+                return
 
-        output_base = exe_dir if output_same.get() else output_entry.get()
-        name = os.path.basename(input_path.rstrip("\\/"))
-        output_path = os.path.join(output_base, name + "_compressed")
+            # Safety Check: Prevent accidental duplication of the entire Desktop or Root drive
+            home_dir = os.path.expanduser("~")
+            desktop_dir = os.path.join(home_dir, "Desktop")
+            if input_same.get() and (exe_dir == os.path.abspath(os.sep) or exe_dir == desktop_dir):
+                messagebox.showerror("Safety Error", "Running this directly on the Desktop or Root drive with 'Use EXE folder' checked is unsafe (it will copy everything). Please put the images in a specific folder, or uncheck 'Use EXE folder' and browse manually.")
+                return
 
-        if os.path.exists(output_path):
-            shutil.rmtree(output_path)
-        shutil.copytree(input_path, output_path)
+            output_base = exe_dir if output_same.get() else output_entry.get()
+            name = os.path.basename(input_path.rstrip("\\/"))
+            output_path = os.path.join(output_base, name + "_compressed")
 
-        pingo = resource_path("pingo.exe")
+            if os.path.exists(output_path):
+                shutil.rmtree(output_path)
+            shutil.copytree(input_path, output_path)
 
-        for root_dir, _, files in os.walk(output_path):
-            for f in files:
+            pingo = resource_path("pingo.exe")
+            
+            # Gather all files first
+            files_to_compress = []
+            for root_dir, _, files in os.walk(output_path):
+                for f in files:
+                    files_to_compress.append((root_dir, f))
+
+            # Multithreading: Process file logic
+            def process_image(item):
+                root_dir, f = item
                 path = os.path.join(root_dir, f)
-
                 try:
                     if png_var.get() and f.lower().endswith(".png"):
                         subprocess.run(
@@ -71,8 +89,17 @@ def compress():
                 except:
                     pass
 
-        messagebox.showinfo("Done", f"Saved to:\n{output_path}")
+            # Multithreading: Execute in parallel based on CPU cores
+            with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() or 4) as executor:
+                executor.map(process_image, files_to_compress)
 
+            messagebox.showinfo("Done", f"Saved to:\n{output_path}")
+            
+        finally:
+            # UX Fix: Re-enable button when done (or if an error occurs)
+            compress_btn.configure(text="Compress Images", state="normal")
+
+    # Start background thread to keep UI responsive
     threading.Thread(target=run_compression).start()
 
 # ---------- UI ----------
@@ -164,12 +191,14 @@ output_entry.pack(fill="x", padx=10, pady=5)
 ctk.CTkButton(main, text="Browse", command=browse_output).pack(padx=10, pady=(0,10))
 
 # ---------- RUN ----------
-ctk.CTkButton(
+# Extracted button to a variable to manage states
+compress_btn = ctk.CTkButton(
     main,
     text="Compress Images",
     height=45,
     corner_radius=10,
     command=compress
-).pack(pady=20, padx=10, fill="x")
+)
+compress_btn.pack(pady=20, padx=10, fill="x")
 
 app.mainloop()
