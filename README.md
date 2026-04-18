@@ -31,6 +31,7 @@ Kanna was built to provide a simple, one-click interface for efficient image com
 Download the latest executable from Releases:
 
 https://github.com/YOUR_USERNAME/YOUR_REPO/releases
+<img width="1470" height="294" alt="image" src="https://github.com/user-attachments/assets/f0b7e872-6a4e-4b5c-afde-0d095e3e495e" />
 
 ---
 
@@ -92,6 +93,8 @@ icon.ico
 
 
 ### 4. Build EXE:
+  in the address bar of the folder containing the above mentioned files type cmd and press enter. in cmd window that opens paste following compile command
+   
    python -m PyInstaller --onefile --noconsole --icon=icon.ico --add-binary "pingo.exe;." --add-data "icon.ico;." app.py  
 
 
@@ -106,12 +109,17 @@ icon.ico
 
 ---
 
-## Notes
+# Notes
 
 - Only PNG and JPG files are compressed  
 - Other file types (GIF, MP4, etc.) remain unchanged  
 - Original files are not modified  
-- Recommended to keep backups for important data  
+- Recommended to keep backups for important data
+
+- Test run on few files to get the feel of the .exe
+- it will give pop up on completetion  <img width="528" height="198" alt="image" src="https://github.com/user-attachments/assets/7ac58b2f-a7f6-4432-bc10-2b263fdae03b" />
+- if the app doesnt respond, dont panic and wait or just kill the app from task manager (it was compressing the media files in the background)
+- dont run the .exe again before the pop up of the previous job comes (for now no way to stop ongoing jop)  
 
 ---
 
@@ -146,7 +154,7 @@ Pingo internally uses multiple open-source libraries including:
 - Progress bar with live status
 - File count and size reduction statistics
 - Drag-and-drop folder support
-- Preset compression profiles
+- multithread processing
 
 ---
 
