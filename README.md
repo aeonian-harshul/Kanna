@@ -154,7 +154,6 @@ Pingo internally uses multiple open-source libraries including:
 - Progress bar with live status
 - File count and size reduction statistics
 - Drag-and-drop folder support
-- multithread processing
 
 ---
 
