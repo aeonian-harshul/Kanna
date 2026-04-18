@@ -30,12 +30,12 @@ Kanna was built to provide a simple, one-click interface for efficient image com
 
 Download the latest executable from Releases:
 
-https://github.com/YOUR_USERNAME/YOUR_REPO/releases
-<img width="1458" height="555" alt="image" src="https://github.com/user-attachments/assets/8d50c450-c062-4869-a9d8-df09416b62d8" />
+https://github.com/aeonian-harshul/Kanna/blob/main/kanna.exe
+<img width="700" height="274" alt="image" src="https://github.com/user-attachments/assets/8d50c450-c062-4869-a9d8-df09416b62d8" />
 
 ### ⚠️ Windows SmartScreen Warning
 Because Kanna is a newly built, open-source tool without a paid corporate certificate, your browser or Windows Defender may flag the `.exe` as an "unrecognized app."
-<img width="449" height="600" alt="image" src="https://github.com/user-attachments/assets/0a0cb58c-65ab-49db-822a-bc97ae47fb77" />
+<img width="225" height="300" alt="image" src="https://github.com/user-attachments/assets/0a0cb58c-65ab-49db-822a-bc97ae47fb77" />
 edge showing it me on my own pc
 
 ---
