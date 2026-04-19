@@ -156,7 +156,7 @@ Pingo internally uses multiple open-source libraries including:
 ---
 
 ## Future Improvements
-
+- new Pillow-based PNG quantization and WebP lossy conversion
 - Progress bar with live status
 - File count and size reduction statistics
 - Drag-and-drop folder support
